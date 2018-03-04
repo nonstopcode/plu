@@ -1,0 +1,31 @@
+<?xml version='1.0' ?>
+<doc>
+  <item>
+    <name>lemon</name>
+    <code>4053</code>
+  </item>
+  <item>
+    <name>banana</name>
+    <code>4011</code>
+  </item>
+   <item>
+    <name>Orange</name>
+    <code>4038</code>
+  </item>
+  <item>
+    <name>Cucumber</name>
+    <code>4038</code>
+  </item>
+   <item>
+    <name>pear</name>
+    <code>4038</code>
+  </item>
+    <item>
+    <name>cherry</name>
+    <code>4038</code>
+  </item>
+   <item>
+    <name>Grapes</name>
+    <code>4058</code>
+  </item>
+</doc>

@@ -1,25 +1,41 @@
 var express = require('express');
-
 var app = express();
-var server = app.listen(process.env.PORT || 3000);
+var server= require('http').createServer(app);
+var io = require('socket.io').listen(server);
+
+
+var path = require('path');
+
 
 app.use(express.static('public'));
 
-console.log("My socket server is running");
+users = [];
+connections = [];
 
-var socket = require('socket.io');
+server.listen(process.env.PORT || 3000);
+console.log('Server Running');
 
-var io = socket(server);
+app.get('/', function(req, res){
+	res.sendFile(__dirname + '/index.html');
+});
 
-io.sockets.on('connection', newConnection);
+io.sockets.on('connection', function(socket){
+	connections.push(socket);
+	console.log('connected: %s sockets connected', connections.length);
 
-function newConnection(socket){
-	console.log('new connection: '+ socket.id);
 
-	socket.on('mouse', mouseMsg);
 
-	function mouseMsg(data){
-		console.log(data);
-		socket.broadcast.emit('mouse',data);
-	}
-}
+	// Disconnect
+	socket.on('disconnect',function(data){
+		connections.splice(connections.indexOf(socket), 1);
+		console.log('Disconnected: %s sockets connected', connections.length);
+	});
+
+	// Send message
+	socket.on('send message', function(data){
+			io.sockets.emit('new message', {msg: data});
+
+	});
+
+
+});
